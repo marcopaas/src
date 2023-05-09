@@ -17,7 +17,7 @@ public class RidePlanMinDistance {
 			// to be completed
 			
 		}
-		return new Location();
+		return new Location("", 0, 0);
 		
 	}
 	
