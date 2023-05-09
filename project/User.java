@@ -1,6 +1,9 @@
 package project;
 
+import java.util.ArrayList;
+
 public class User {
+	private static int lastId = 0;
 	private int id;
 	private String name;
 	private Location position;
@@ -10,6 +13,22 @@ public class User {
 	private int nbOfRides;
 	private CreditCard creditCard;
 	
+	
+	
+	
+	public User(String name, Location position, CreditCard creditCard) {
+		super();
+		this.name = name;
+		this.position = position;
+		this.creditCard = creditCard;
+		bike_in_use = false;
+		totalTime = 0;
+		nbOfRides = 0;
+		lastId += 1;
+		id = lastId;
+		
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -65,6 +84,45 @@ public class User {
 	public void setCreditCard(CreditCard creditCard) {
 		this.creditCard = creditCard;
 	}
+	
+	public BikeRide SearchRide(Location start, Location end, BikeType type) {
+		
+		BikeRide ride = null;
+		//check nearest station with required type
+		DockingStation s1 = MyVelib.CheckNearestStation(start, type);
+		if (s1==null)
+			System.out.println("There is no available bike type for your ride");
+		else {
+				// check nearest destination station
+				//check if there is empty place	
+				DockingStation s2 = MyVelib.CheckNearestStation(end);
+				if(s2==null)
+					System.out.println("There is no available empty slot to park your bike");
+				ride = new BikeRide(this, type, s1.getGps(), s2.getGps());
+				System.out.println("Your ride from " + s1.getGps().toString() + " to " + s2.getGps().toString() + " is available. ");
+				
+		}		
+		
+		return ride;
+	}
+	
+//	public void BookRide(BikeRide ride) {
+//		
+//		
+//	}
+//	
+//	public void BookRide(Location start, Location end, BikeType type) {
+//		
+//		
+//	
+//	}
+	
+	
+	public void Quit() {
+		MyVelib.removeUser(this);
+	}
+	
+	
 	
 	
 	
