@@ -2,12 +2,16 @@ package project;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+<<<<<<< HEAD
 public abstract class MyVelib {
 
 	
 	
 	
 	
+=======
+public abstract class MyVelib{
+>>>>>>> ea412527c47e30ac584971e97b4caa66b9937762
 	private static ArrayList<User> users;
 	private static ArrayList<DockingStation> stations;
 	
@@ -16,6 +20,7 @@ public abstract class MyVelib {
 	public static ArrayList<User> getUsers() {
 		return users;
 	}
+<<<<<<< HEAD
 
 	public static ArrayList<DockingStation> getStations() {
 		return stations;
@@ -58,6 +63,16 @@ public abstract class MyVelib {
 			
 		}
 		return nearest;
+=======
+	public static void addUser(User users1) {
+		users.add(users1);
+	}
+	public static ArrayList<DockingStation> getStations() {
+		return stations;
+	}
+	public static void addStation(DockingStation stations1) {
+		stations.add(stations1);
+>>>>>>> ea412527c47e30ac584971e97b4caa66b9937762
 	}
 	
 	//to check the nearest destination
