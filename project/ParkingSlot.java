@@ -1,16 +1,18 @@
 package project;
 
 public class ParkingSlot {
+	private static int counter = 0;
 	private int id;
 	private Bike bike;
 	private SlotStatus status;
 	
 	
-	public ParkingSlot(int id, Bike bike, SlotStatus status) {
+	public ParkingSlot(Bike bike, SlotStatus status) {
 		super();
-		this.id = id;
+		this.id = counter;
 		this.bike = bike;
 		this.status = status;
+		counter++;
 	}
 
 	public int getId() {
