@@ -1,0 +1,97 @@
+public BikeRide SearchRide(Location start, Location end, BikeType type) {
+		
+		BikeRide ride = null;
+		//check nearest station with required type
+		DockingStation s1 = MyVelib.CheckNearestStation(start, type);
+		if (s1==null)
+			System.out.println("There is no available bike type for your ride");
+		else {
+				// check nearest destination station
+				//check if there is empty place	
+				DockingStation s2 = MyVelib.CheckNearestStation(end);
+				if(s2==null)
+					System.out.println("There is no available empty slot to park your bike");
+				ride = new BikeRide(this, type, s1.getGps(), s2.getGps());
+				System.out.println("Your ride from " + s1.getGps().toString() + " to " + s2.getGps().toString() + " is available. ");
+				
+		}		
+		
+		return ride;
+	}
+
+
+
+
+//	public static HashMap<DockingStation, Double> SortStations(Location loc){
+//		
+//		HashMap<DockingStation, Double> stationsToBeSorted = new HashMap<DockingStation, Double>();
+//			for(DockingStation s : stations)
+//			{
+//				stationsToBeSorted.put(s, loc.)
+//			}
+//		return stationsToBeSorted;
+//	}
+	
+	//to check the nearest starting pt
+	/* public static DockingStation CheckNearestStation(Location loc, BikeType type) {
+		DockingStation nearest = null;
+		double distance = -1;
+		
+		for(DockingStation s : stations) {
+			if (s.isOnService() && s.CheckForSpecifiedBike(type))
+			{
+				Location l = s.getGps();
+				double d = loc.distanceTo(l);
+				if(distance == -1)
+				{
+					// can we set them equal??
+					nearest = s;
+					distance = d;
+				}
+					
+				else if(d<distance && s.CheckForSpecifiedBike(type)) {
+					distance = d;
+					nearest = s;
+					
+				}
+			}
+			
+		}
+		return nearest;
+	} */
+		
+	
+	//to check the nearest destination
+	/* public static DockingStation CheckNearestStation(Location loc) {
+		DockingStation nearest = null;
+		double distance = -1;
+		
+		for(DockingStation s : stations) {
+			if (s.isOnService() && s.CheckForEmptySlots())
+			{
+				Location l = s.getGps();
+				double d = loc.distanceTo(l);
+				if(distance == -1)
+				{
+					// can we set them equal??
+					nearest = s;
+					distance = d;
+				}
+					
+				else if(d<distance && s.CheckForEmptySlots())
+				{
+					distance = d;
+					nearest = s;
+					
+				}
+			}
+			
+		}
+		return nearest;
+	} */
+	
+	
+	/* public static DockingStation CheckNearestStation(Location loc, ArrayList<DockingStation> stationsNotContainingType) {
+		
+		return null;
+	} */

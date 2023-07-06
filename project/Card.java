@@ -1,13 +1,14 @@
 package project;
 
 public abstract class Card {
-
+	private static int counter = 0;
 	private int cardNumber;
 	private String userName;
 	
-	public Card(int number, String name) {
+	public Card(String name) {
 		setUserName(name);
-		setCardNumber(number);
+		setCardNumber(counter);
+		counter++;
 	}
 	
 	
@@ -25,6 +26,10 @@ public abstract class Card {
 		this.userName = userName;
 	}
 	
+	public void print(){
+		System.out.println("Username: " + getUserName());
+		System.out.println("Card Number: " + getCardNumber());
+	}
 	
 	
 }

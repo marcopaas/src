@@ -2,24 +2,25 @@ package project;
 import java.util.ArrayList;
 
 public abstract class DockingStation {
+
+	private int numberReturns;
+	private int numberRents;
 	private int id;
 	private Location gps;
 	private boolean onService;
-	private ArrayList<ParkingSlot> slots;
+	private ArrayList<ParkingSlot> slots = new ArrayList<ParkingSlot>();
 	//private Terminal terminal;
-	private int numberReturns;
-	private int numberRents;
 	
-	public DockingStation(int id, Location gps, boolean onService, ArrayList<ParkingSlot> slots,
-			int numberReturns, int numberRents) {
+	public DockingStation(Location gps) {
 		super();
-		this.id = id;
+		StationIDGenerator gen = StationIDGenerator.getInstance();
+		this.id = gen.getStationID();
 		this.gps = gps;
-		this.onService = onService;
-		this.slots = slots;
+		this.onService = true;
+		//this.slots = slots;
 		//this.terminal = terminal;
-		this.numberReturns = numberReturns;
-		this.numberRents = numberRents;
+		//this.numberReturns = 0;
+		//this.numberRents = 0;
 	}
 	
 
@@ -44,8 +45,8 @@ public abstract class DockingStation {
 		return slots;
 	}
 
-	public void setSlots(ArrayList<ParkingSlot> slots) {
-		this.slots = slots;
+	public void addSlot(ParkingSlot slot) {
+		slots.add(slot);
 	}
 
 //	public Terminal getTerminal() {
@@ -58,8 +59,8 @@ public abstract class DockingStation {
 
 	
 	//create a method to check whether a docking station has a specified bike
-	public boolean CheckForSpecifiedBike(BikeType type) {
-		boolean exists = false;
+	public ParkingSlot checkForSpecifiedBike(BikeType type) {
+		ParkingSlot slot = null;
 		BikeType t;
 		for(ParkingSlot s : slots)
 		{
@@ -68,26 +69,25 @@ public abstract class DockingStation {
 			t = s.getBike().getType();
 			if (t!= null && t == type)
 			{
-				exists = true;
+				slot = s;
 				break;
 			}
 		}
-		return exists;
+		return slot;
 				
 	}
 	
 	
-	public boolean CheckForEmptySlots() {
+	public ParkingSlot checkForEmptySlots() {
 		boolean exists = false;
 		for (ParkingSlot s : slots)
 		{
 			if (s.getStatus() == SlotStatus.FREE)
 			{
-				exists = true;
-				break;
+				return s;
 			}
 		}
-		return exists;
+		return null;
 	}
 	
 	
@@ -113,5 +113,11 @@ public abstract class DockingStation {
 	
 	public boolean isOnService() {
 		return onService;
+	}
+	
+	@Override
+	public String toString() {
+		return "DockingStation [numberReturns=" + numberReturns + ", numberRents=" + numberRents + ", id=" + id
+				+ ", gps=" + gps + ", onService=" + onService + "]";
 	}
 }

@@ -2,14 +2,21 @@ package project;
 
 import java.util.ArrayList;
 
-public class RidePlanMinDistance {
-	public RidePlanMinDistance(Location start, Location destination, BikeType type ) {
-		
-		// TODO Auto-generated constructor stub
-		
+public class PreferPlus implements RidePlanning{
+	public PreferPlus() {
+		super();
 	}
 	
-	public Location checkMinDist(Location startOrDest)
+	public Bike getBikeStart(Location loc, BikeType type){
+		//to do
+		return null;
+	}
+	public DockingStation getStationEnd(Location loc){
+		//to do
+		return null;
+	}
+
+	/* public Location checkMinDist(Location startOrDest)
 	{
 		
 		ArrayList<DockingStation> stations = MyVelib.getStations();
@@ -29,5 +36,5 @@ public class RidePlanMinDistance {
 	public boolean endHasParkingSpot(Location dest) {
 		
 		return false;
-	}
+	} */
 }

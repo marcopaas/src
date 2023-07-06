@@ -2,10 +2,16 @@ package project;
 
 public class VmaxCard extends RegistrationCard{
 
-	public VmaxCard(int number, User user) {
-		super(number, user);
+	public VmaxCard(String username) {
+		super(username);
 		
 		// TODO Auto-generated constructor stub
 	}
+
+	public void print(){
+		super.print();
+		System.out.println("Card Type: Vmax");
+	}
+
 
 }

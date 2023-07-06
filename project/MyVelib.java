@@ -1,128 +1,125 @@
 package project;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Random;
 
-<<<<<<< HEAD
-public abstract class MyVelib {
-
-	
-	
-	
-	
-=======
-public abstract class MyVelib{
->>>>>>> ea412527c47e30ac584971e97b4caa66b9937762
-	private static ArrayList<User> users;
-	private static ArrayList<DockingStation> stations;
+public class MyVelib {
+	private static String name;
+	private static ArrayList<User> users = new ArrayList<User>();
+	private static ArrayList<DockingStation> stations = new ArrayList<DockingStation>();
+	private static ArrayList<Bike> bikes = new ArrayList<Bike>();
 	
 	//maybe add arraylist of current bikerides
 	
 	public static ArrayList<User> getUsers() {
 		return users;
 	}
-<<<<<<< HEAD
-
 	public static ArrayList<DockingStation> getStations() {
 		return stations;
 	}
-
-	
-//	public static HashMap<DockingStation, Double> SortStations(Location loc){
-//		
-//		HashMap<DockingStation, Double> stationsToBeSorted = new HashMap<DockingStation, Double>();
-//			for(DockingStation s : stations)
-//			{
-//				stationsToBeSorted.put(s, loc.)
-//			}
-//		return stationsToBeSorted;
-//	}
-	
-	//to check the nearest starting pt
-	public static DockingStation CheckNearestStation(Location loc, BikeType type) {
-		DockingStation nearest = null;
-		double distance = -1;
-		
-		for(DockingStation s : stations) {
-			if (s.isOnService() && s.CheckForSpecifiedBike(type))
-			{
-				Location l = s.getGps();
-				double d = loc.distanceTo(l);
-				if(distance == -1)
-				{
-					// can we set them equal??
-					nearest = s;
-					distance = d;
-				}
-					
-				else if(d<distance && s.CheckForSpecifiedBike(type)) {
-					distance = d;
-					nearest = s;
-					
-				}
-			}
-			
-		}
-		return nearest;
-=======
+	public static ArrayList<Bike> getBikes() {
+		return bikes;
+	}
 	public static void addUser(User users1) {
 		users.add(users1);
 	}
-	public static ArrayList<DockingStation> getStations() {
-		return stations;
-	}
 	public static void addStation(DockingStation stations1) {
 		stations.add(stations1);
->>>>>>> ea412527c47e30ac584971e97b4caa66b9937762
 	}
-	
-	//to check the nearest destination
-	public static DockingStation CheckNearestStation(Location loc) {
-		DockingStation nearest = null;
-		double distance = -1;
-		
-		for(DockingStation s : stations) {
-			if (s.isOnService() && s.CheckForEmptySlots())
-			{
-				Location l = s.getGps();
-				double d = loc.distanceTo(l);
-				if(distance == -1)
-				{
-					// can we set them equal??
-					nearest = s;
-					distance = d;
-				}
-					
-				else if(d<distance && s.CheckForEmptySlots())
-				{
-					distance = d;
-					nearest = s;
-					
-				}
-			}
-			
-		}
-		return nearest;
-	}
-	
-	
-	public static DockingStation CheckNearestStation(Location loc, ArrayList<DockingStation> stationsNotContainingType) {
-		
-		return null;
+	public static void addBike(Bike b) {
+		bikes.add(b);
 	}
 
-	
-	public static void addUser(User users1) {
-		users.add(users1);
-	}
-	
-	public static void addStation(DockingStation stations1) {
-		stations.add(stations1);
-	}
-	
-	
 	public static void removeUser(User user) {
 		users.remove(user);
 	}
+	public static String getName() {
+		return name;
+	}
+	public static void setName(String name) {
+		MyVelib.name = name;
+	}
 	
+	public static void setup(String velibNetworkName, int numStations, int numParkingSlots, int sideLength, int numBikes) {
+		MyVelib.name = velibNetworkName;
+		
+        // Calculate the distance between two consecutive stations
+		double distanceBetweenStations = sideLength / Math.sqrt(numStations);
+		
+		// Initialize random number generator
+        Random random = new Random();
+        
+        int numTotSlots = numStations*numParkingSlots;
+        
+        boolean[][] array = new boolean[numStations][numParkingSlots];
+        
+        int count = 0;
+        while (count < numBikes) {
+            int i = random.nextInt(numStations);
+            int j = random.nextInt(numParkingSlots);
+            if (!array[i][j]) {
+                array[i][j] = true;
+                count++;
+            }
+        }
+        
+        
+		for (int i = 0; i < numStations; i++) {
+            // Calculate the x and y coordinates of the station
+            double x = (i % Math.sqrt(numStations)) * distanceBetweenStations;
+            double y = (i / Math.sqrt(numStations)) * distanceBetweenStations;
+            
+            // Create the station and add it to the map
+            Location loc = new Location("Station"+i,x,y);
+            StdStation stdStation = new StdStation(loc);
+            stations.add(stdStation);
+            
+            //lets add the slots
+            for (int ii = 0; ii < numParkingSlots; ii++) {
+            	ParkingSlot slot = new ParkingSlot(null, SlotStatus.FREE);
+            	stdStation.addSlot(slot);
+            	
+            	//add bike 
+            	if(array[i][ii]==true) {
+            		boolean sel = random.nextBoolean();
+            		BikeType b;
+            		//if(sel == true) 
+            			b = BikeType.MECHANICAL;
+            		// else b = BikeType.ELECTRICAL;
+            		Bike bike = new Bike(loc,b,stdStation,slot);
+            		slot.setBike(bike);
+            		slot.setStatus(SlotStatus.OCCUPIED);
+            		MyVelib.addBike(bike);
+            	}
+            }
+        }
+	}
 	
+	public static ArrayList<DockingStation> sort(String s){
+		if(s.equals("leastOccupied")) {
+			Comparator<DockingStation> comp = new LeastOccupiedComparator();
+			ArrayList<DockingStation> sorted = new ArrayList<DockingStation>();
+			sorted = stations;
+			Collections.sort(sorted, comp);
+			return sorted;
+		}
+		else if(s.equals("mostUsed")) {
+			Comparator<DockingStation> comp = new MostUsedComparator();
+			ArrayList<DockingStation> sorted = new ArrayList<DockingStation>();
+			sorted = stations;
+			Collections.sort(sorted, comp);
+			return sorted;
+		}
+		else {
+			System.out.println("Invalid sorting policy. it can either be leastOccupied or mostUsed");
+		}
+		return stations;
+	}
+	
+	@Override
+	public String toString() {
+		return "Users : " + users + "\n Stations : " + stations + "\n Bikes :" + bikes;
+	}
 }

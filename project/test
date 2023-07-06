@@ -1,0 +1,151 @@
+package project;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.*;
+
+class MinDistanceTest {
+//	private Bike b1;
+//	private Bike b2;
+//	private Bike b3;
+//	private RidePlanner planner;
+//	private Location loc1;
+//	private Location loc2;
+	
+//	@Before
+//	public void initAll() {
+//		System.out.println("initall 1 done");
+//		loc1 = new Location("1",1,1);
+//		loc2 = new Location("1",4,4);
+//		System.out.println("initall 2 done");
+//		planner = new RidePlanner(new MinDistance());
+//		System.out.println("initall 3 done");
+//		
+//		b1 = new Bike(loc1, BikeType.ELECTRICAL);
+//		b2 = new Bike(loc2, BikeType.ELECTRICAL);
+//		b3 = new Bike(loc1, BikeType.MECHANICAL);
+//		System.out.println("initall 4 done");
+//		MyVelib.addBike(b1);
+//		MyVelib.addBike(b2);
+//		MyVelib.addBike(b3);
+//		System.out.println("initall 5 done");
+//	}
+	
+//	@Before
+//	public void init() {
+//		System.out.println("init done");
+////		loc1 = new Location("1",1,1);
+////		loc2 = new Location("1",4,4);
+////		
+////		planner = new RidePlanner(new MinDistance());
+////		
+////		b1 = new Bike(loc1, BikeType.ELECTRICAL);
+////		b2 = new Bike(loc2, BikeType.ELECTRICAL);
+////		b3 = new Bike(loc1, BikeType.MECHANICAL);
+////		
+////		MyVelib.addBike(b1);
+////		MyVelib.addBike(b2);
+////		MyVelib.addBike(b3);
+//		
+//	}
+	
+	
+	@Test
+	void testGetBikeStart() {
+		
+//		Bike b4 = planner.getStart(new Location("userloc",1 ,2), BikeType.MECHANICAL);
+//		Bike b5 = planner.getStart(new Location("userloc",1 ,2), BikeType.ELECTRICAL);
+//		
+		assertFalse(true);
+		//System.out.println(b3);
+		//assertEquals(b4, b3);
+		//assertTrue(true);
+	}
+		
+
+//	@Test
+//	void testGetBikeStart1() {
+//	
+//		RidePlanner planner = new RidePlanner(new MinDistance());
+//		
+//		Bike b = planner.getStart(new Location("userloc",1 ,2), BikeType.ELECTRICAL);
+//		
+//		//System.out.println(b3);
+//		
+//		assertTrue(b3 == b2);
+//	}
+	
+//	
+//	@Test
+//	void testGetBikeStart2() {
+//	
+//	
+//		
+//		RidePlanner planner = new RidePlanner(new MinDistance());
+//		
+//		Bike b3 = planner.getStart(new Location("userloc",3,3), BikeType.ELECTRICAL);
+//		
+//		//System.out.println(b3);
+//		
+//		assertTrue(b3 == b2);
+//	}
+/*
+	@Test
+	void testGetStationEnd() {
+		
+		
+		
+		DockingStation st1 = new StdStation(loc1);
+		st1.addSlot(new ParkingSlot(b1, SlotStatus.OCCUPIED));
+		st1.addSlot(new ParkingSlot(null, SlotStatus.FREE));
+		
+		DockingStation st2 = new PlusStation(loc2);
+		st2.addSlot(new ParkingSlot(b2, SlotStatus.FREE));
+		
+		MyVelib.addStation(st1);
+		MyVelib.addStation(st2);
+		
+		RidePlanner planner = new RidePlanner(new MinDistance());
+		
+		//getEnd will return the closest Station having free parking slots, checking in the stations of velib
+		Location end = planner.getEnd(new Location("userloc",3,3));
+		
+		//System.out.println(b3);
+		
+		assertTrue(end == loc2);
+	}
+	
+	/*
+	@Test
+	void testGetStationEnd2() {
+		Location loc1 = new Location("1",1,1);
+		Location loc2 = new Location("2",4,4);
+		
+		Bike b1 = new Bike(loc1, BikeType.ELECTRICAL, true);
+		Bike b2 = new Bike(loc2, BikeType.ELECTRICAL, true);
+		
+		MyVelib.addBike(b1);
+		MyVelib.addBike(b2);
+		
+		DockingStation st1 = new StdStation(loc1);
+		st1.addSlot(new ParkingSlot(b1, SlotStatus.OCCUPIED));
+		st1.addSlot(new ParkingSlot(null, SlotStatus.FREE));
+		
+		DockingStation st2 = new PlusStation(loc2);
+		st2.addSlot(new ParkingSlot(null, SlotStatus.FREE));
+		
+		MyVelib.addStation(st1);
+		MyVelib.addStation(st2);
+		
+		RidePlanner planner = new RidePlanner(new MinDistance());
+		
+		//getEnd will return the closest Station having free parking slots, checking in the stations of velib
+		Location end = planner.getEnd(new Location("userloc",1,1));
+		
+		//System.out.println(b3);
+		
+		assertTrue(end == loc1);
+	}
+	*/
+
+}

@@ -39,8 +39,14 @@ public class ParkingSlot {
 		this.bike = bike;
 	}
 	
-	public boolean isFree() {
+	/* public boolean isFree() {
 		if (status == SlotStatus.FREE) return true;
+		else return false;
+	} */
+	
+	public boolean outOfOrder(){
+		if (status == SlotStatus.OUT_OF_ORDER) 
+			return true;
 		else return false;
 	}
 	

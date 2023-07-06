@@ -1,17 +1,36 @@
 package project;
 
 public class Bike {
+	@Override
+	public String toString() {
+		return "Bike [id=" + id + ", gps=" + gps + ", type=" + type + ", returned=" + returned + ", station=" + station
+				+ ", slot=" + slot + "]";
+	}
+
 	private int id;
 	private Location gps;
 	private BikeType type;
 	private boolean returned;
+	private DockingStation station;
+	private ParkingSlot slot;
 	
-	public Bike(int id, Location gps, BikeType type, boolean returned) {
+	public Bike(Location gps, BikeType type) {
 		super();
-		this.id = id;
+		BikeIDGenerator gen = BikeIDGenerator.getInstance();
+		this.id = gen.getBikeID();
 		this.gps = gps;
 		this.type = type;
-		this.returned = returned;
+		this.returned = true;
+	}
+	public Bike(Location gps, BikeType type, DockingStation station, ParkingSlot slot) {
+		super();
+		BikeIDGenerator gen = BikeIDGenerator.getInstance();
+		this.id = gen.getBikeID();
+		this.gps = gps;
+		this.type = type;
+		this.returned = true;
+		this.station = station;
+		this.slot = slot;
 	}
 
 	public int getId() {
@@ -44,6 +63,22 @@ public class Bike {
 
 	public void setReturned(boolean returned) {
 		this.returned = returned;
+	}
+
+	public DockingStation getStation() {
+		return station;
+	}
+
+	public void setStation(DockingStation station) {
+		this.station = station;
+	}
+
+	public ParkingSlot getSlot() {
+		return slot;
+	}
+
+	public void setSlot(ParkingSlot slot) {
+		this.slot = slot;
 	}
 	
 }
